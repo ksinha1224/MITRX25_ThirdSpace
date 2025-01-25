@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Action<GameState> OnGameStateChange;
 
     [SerializeField] private Computer computer;
+    [field: SerializeField] public List<Popup> ActivePopups { get; private set; }
 
     private void Awake()
     {
@@ -27,6 +28,16 @@ public class GameManager : MonoBehaviour
     private void UpdateGameState(GameState newState)
     {
         CurrentState = newState;
+    }
+
+    public void AddPopup(Popup toAdd)
+    {
+        ActivePopups.Add(toAdd);
+    }
+
+    public void RemovePopup(Popup toRemove)
+    {
+        ActivePopups.Remove(toRemove);
     }
 }
 

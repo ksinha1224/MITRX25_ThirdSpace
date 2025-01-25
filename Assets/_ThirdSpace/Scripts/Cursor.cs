@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using System.Linq;
 
 public class Cursor : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Cursor : MonoBehaviour
     private bool isMoving;
     private Transform followPoint;
 
+    private Vector3 lastLocalPos;
+    private Popup toMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,14 +27,27 @@ public class Cursor : MonoBehaviour
 
     private void Update()
     {
-        if(isMoving)
-        {
-            Vector3 newPos = followPoint.position;
-            newPos.z = transform.position.z;
+        MovementUpdate();
+    }
 
-            transform.position = newPos;
-            ClampToScreen();
-        }
+    void MovementUpdate()
+    {
+        if (!isMoving)
+            return;
+
+        Vector3 newPos = followPoint.position;
+        newPos.z = transform.position.z;
+
+        transform.position = newPos;
+        ClampToScreen();
+
+        if (toMove == null)
+            return;
+
+        Vector3 popupDiff = thisRect.localPosition - lastLocalPos;
+        toMove.UpdatePositionBy(popupDiff);
+
+        lastLocalPos = thisRect.localPosition;
     }
 
     public void INTERACT_OnHover()
@@ -59,11 +76,34 @@ public class Cursor : MonoBehaviour
         isMoving = false;
     }
 
-    public void INTERACT_OnFocus()
+    public void INTERACT_OnActivate()
     {
         //simulate mouse click
         //check for any overlapping popup rects
-        //only pass on effects to the "topmost" one in depth order (lowest no)
+        //only pass on effects to the "topmost" one in depth order (highest on top- instantiation order)
+
+        List<Popup> intersectedPopups = new List<Popup>();
+        foreach(Popup popup in GameManager.Instance.ActivePopups)
+        {
+            bool intersects = RectsIntersect(thisRect, popup.rectTransform);
+            Debug.Log($"popup {popup.gameObject.name} intersects? {intersects}");
+
+            if(intersects)
+            {
+                intersectedPopups.Add(popup);
+            }
+        }
+
+        intersectedPopups = intersectedPopups.OrderByDescending(popup => popup.DepthLayer).ToList();
+        //intersectedPopups[0].StartMoving(thisRect);
+
+        toMove = intersectedPopups[0];
+        lastLocalPos = thisRect.localPosition;
+    }
+
+    public void INTERACT_OnDeactivate()
+    {
+        toMove = null;
     }
 
     private void ClampToScreen()
@@ -76,5 +116,23 @@ public class Cursor : MonoBehaviour
         thisPos.y = Mathf.Clamp(thisRect.localPosition.y, minPos.y, maxPos.y);
 
         thisRect.localPosition = thisPos;
+    }
+
+    private bool RectsIntersect(RectTransform a, RectTransform b)
+    {
+        Rect worldRectA = WorldRect(a);
+        Rect worldRectB = WorldRect(b);
+        return worldRectA.Overlaps(worldRectB);
+    }
+
+    //ref: https://stackoverflow.com/questions/42043017/check-if-ui-elements-recttransform-are-overlapping
+    public Rect WorldRect(RectTransform rectTransform)
+    {
+        Vector2 sizeDelta = rectTransform.sizeDelta;
+        float rectTransformWidth = sizeDelta.x * rectTransform.lossyScale.x;
+        float rectTransformHeight = sizeDelta.y * rectTransform.lossyScale.y;
+
+        Vector3 position = rectTransform.position;
+        return new Rect(position.x - rectTransformWidth / 2f, position.y - rectTransformHeight / 2f, rectTransformWidth, rectTransformHeight);
     }
 }
