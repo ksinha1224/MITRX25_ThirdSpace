@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screen: {fileID: 6700777714492245132}
-  popupPrefab: {fileID: 0}
+  popupParent: {fileID: 8502015372579199137}
+  popupPrefabs:
+  - {fileID: 4909537873771150161, guid: baf423549e2c6fd4c8f7c80495b7155a, type: 3}
+  - {fileID: 69452511226417508, guid: 05727620d237da2418618f28b547592d, type: 3}
+  - {fileID: 2468265225103217383, guid: c227ff613ea45ac4f8393769c44d2601, type: 3}
 --- !u!1001 &2352186598701616678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,6 +173,11 @@ RectTransform:
 --- !u!223 &6700777714492245132 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 8960286306120845994, guid: bd00b4ff25b9cf646857dcd4f30bbc8f, type: 3}
+  m_PrefabInstance: {fileID: 2352186598701616678}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8502015372579199137 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6150119184533886599, guid: bd00b4ff25b9cf646857dcd4f30bbc8f, type: 3}
   m_PrefabInstance: {fileID: 2352186598701616678}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4056402072581698872

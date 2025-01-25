@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState { get; private set; }
     public Action<GameState> OnGameStateChange;
 
+    [field: SerializeField] public List<Popup> ActivePopups { get; private set; }
+
     [SerializeField] private GameObject editorSim;
     [SerializeField] private Computer computer;
-    [field: SerializeField] public List<Popup> ActivePopups { get; private set; }
+    [SerializeField] private List<Folder> folders;
+
+    [field: SerializeField] public List<PopupData> testContent { get; private set; }
 
     private void Awake()
     {
@@ -44,6 +48,11 @@ public class GameManager : MonoBehaviour
     public void RemovePopup(Popup toRemove)
     {
         ActivePopups.Remove(toRemove);
+    }
+
+    public Folder GetFolder(MediaClassification toGrab)
+    {
+        return folders.Where(folder => folder.classification == toGrab).First();
     }
 }
 

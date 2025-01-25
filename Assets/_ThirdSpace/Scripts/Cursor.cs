@@ -9,9 +9,16 @@ using System.Linq;
 public class Cursor : MonoBehaviour
 {
     [SerializeField] private RectTransform screenRect;
-    [SerializeField] private RawImage image;
+    [SerializeField] private RectTransform cursorParentRect;
+    [SerializeField] private RawImage outline;
+    [SerializeField] private RawImage icon;
 
-    private RectTransform thisRect;
+    [SerializeField] private Texture cursorOpen;
+    [SerializeField] private Texture cursorClosed;
+
+    [SerializeField] private Color defaultColor;
+    [SerializeField] private Color selectedColor;
+
     private bool isMoving;
     private Transform followPoint;
 
@@ -21,8 +28,10 @@ public class Cursor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        image.color = Color.black;
-        thisRect = image.rectTransform;
+        icon.texture = cursorOpen;
+        icon.color = defaultColor;
+
+        outline.enabled = false;
     }
 
     private void Update()
@@ -30,42 +39,45 @@ public class Cursor : MonoBehaviour
         MovementUpdate();
     }
 
-    void MovementUpdate()
+    private void MovementUpdate()
     {
         if (!isMoving)
             return;
 
         Vector3 newPos = followPoint.position;
+        Debug.Log(newPos);
         newPos.z = transform.position.z;
 
         transform.position = newPos;
-        ClampToScreen();
+        //ClampToScreen();
 
         if (toMove == null)
             return;
 
-        Vector3 popupDiff = thisRect.localPosition - lastLocalPos;
+        Vector3 popupDiff = cursorParentRect.localPosition - lastLocalPos;
         toMove.UpdatePositionBy(popupDiff);
 
-        lastLocalPos = thisRect.localPosition;
+        lastLocalPos = cursorParentRect.localPosition;
     }
 
     #region xr interaction events
     public void INTERACT_OnHover()
     {
-        if(!isMoving)
-            image.color = Color.blue;
+        if (!isMoving)
+            outline.enabled = true;
     }
 
     public void INTERACT_OnHoverExit()
     {
         if(!isMoving)
-            image.color = Color.black;
+            outline.enabled = false;
     }
 
     public void INTERACT_OnSelect(SelectEnterEventArgs args)
     {
-        image.color = Color.green;
+        outline.enabled = false;
+
+        icon.color = selectedColor;
         isMoving = true;
 
         followPoint = args.interactorObject.GetAttachTransform(args.interactableObject);
@@ -73,16 +85,18 @@ public class Cursor : MonoBehaviour
 
     public void INTERACT_OnRelease()
     {
-        image.color = Color.black;
+        icon.color = defaultColor;
         isMoving = false;
     }
 
     public void INTERACT_OnActivate()
     {
+        icon.texture = cursorClosed;
+
         List<Popup> intersectedPopups = new List<Popup>();
         foreach(Popup popup in GameManager.Instance.ActivePopups)
         {
-            bool intersects = RectsIntersect(thisRect, popup.rectTransform);
+            bool intersects = cursorParentRect.WorldIntersects(popup.rectTransform);
             if(intersects)
             {
                 intersectedPopups.Add(popup);
@@ -92,45 +106,30 @@ public class Cursor : MonoBehaviour
         if (intersectedPopups.Count == 0) return;
 
         toMove = intersectedPopups.OrderByDescending(popup => popup.transform.GetSiblingIndex()).ToList()[0];
-        lastLocalPos = thisRect.localPosition;
+        lastLocalPos = cursorParentRect.localPosition;
 
         toMove.transform.SetAsLastSibling(); //brings to front of render order, simulating "focusing" the popup
     }
 
     public void INTERACT_OnDeactivate()
     {
+        icon.texture = cursorOpen;
         toMove = null;
+
+        //toMove.IdentifyCheck();
     }
 
     #endregion
 
     private void ClampToScreen()
     {
-        Vector3 thisPos = thisRect.localPosition;
-        Vector3 minPos = screenRect.rect.min - thisRect.rect.min;
-        Vector3 maxPos = screenRect.rect.max - thisRect.rect.max;
+        Vector3 thisPos = cursorParentRect.localPosition;
+        Vector3 minPos = screenRect.rect.min - cursorParentRect.rect.min;
+        Vector3 maxPos = screenRect.rect.max - cursorParentRect.rect.max;
 
-        thisPos.x = Mathf.Clamp(thisRect.localPosition.x, minPos.x, maxPos.x);
-        thisPos.y = Mathf.Clamp(thisRect.localPosition.y, minPos.y, maxPos.y);
+        thisPos.x = Mathf.Clamp(cursorParentRect.localPosition.x, minPos.x, maxPos.x);
+        thisPos.y = Mathf.Clamp(cursorParentRect.localPosition.y, minPos.y, maxPos.y);
 
-        thisRect.localPosition = thisPos;
-    }
-
-    private bool RectsIntersect(RectTransform a, RectTransform b)
-    {
-        Rect worldRectA = WorldRect(a);
-        Rect worldRectB = WorldRect(b);
-        return worldRectA.Overlaps(worldRectB);
-    }
-
-    //ref: https://stackoverflow.com/questions/42043017/check-if-ui-elements-recttransform-are-overlapping
-    private Rect WorldRect(RectTransform rectTransform)
-    {
-        Vector2 sizeDelta = rectTransform.sizeDelta;
-        float rectTransformWidth = sizeDelta.x * rectTransform.lossyScale.x;
-        float rectTransformHeight = sizeDelta.y * rectTransform.lossyScale.y;
-
-        Vector3 position = rectTransform.position;
-        return new Rect(position.x - rectTransformWidth / 2f, position.y - rectTransformHeight / 2f, rectTransformWidth, rectTransformHeight);
+        cursorParentRect.localPosition = thisPos;
     }
 }

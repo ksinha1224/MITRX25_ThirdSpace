@@ -596,17 +596,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2042905667}
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
---- !u!114 &1113736484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3898087551575383222, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
-  m_PrefabInstance: {fileID: 4419728050496057416}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d291ea5265e3b5f4bacc4de53a8932aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1130176153
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,11 +826,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd7235a6e5563747a51faf2902d83e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ActivePopups>k__BackingField: []
   editorSim: {fileID: 1232001911}
   computer: {fileID: 4419728050496057418}
-  <ActivePopups>k__BackingField:
-  - {fileID: 1113736484}
-  - {fileID: 2038830351}
+  folders: []
+  <testContent>k__BackingField:
+  - popupType: 0
+    classificationType: 0
+    textContent: sample tweet 1
+    imageContent: {fileID: 0}
+    videoContent: []
+  - popupType: 1
+    classificationType: 1
+    textContent: sample image 1
+    imageContent: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    videoContent: []
+  - popupType: 2
+    classificationType: 3
+    textContent: 
+    imageContent: {fileID: 0}
+    videoContent:
+    - {fileID: 2800000, guid: 4bfc3c21b2caa3346b15524bc6e5b1cc, type: 3}
+    - {fileID: 2800000, guid: 7d67cc1af089eb344adf838d38d5ce4f, type: 3}
+    - {fileID: 2800000, guid: 59316173b9c230b4188b26a96344cec3, type: 3}
+    - {fileID: 2800000, guid: d723f9b49f47e0743bb19743b1f1598e, type: 3}
+    - {fileID: 2800000, guid: d282554b7e1b84f48a902f32f35d6f72, type: 3}
+    - {fileID: 2800000, guid: e740e8d0e59acd94192481af37f188fc, type: 3}
+    - {fileID: 2800000, guid: 4d10496bde17d204aa04bc9f48f1f5ca, type: 3}
+    - {fileID: 2800000, guid: 84399a2d5bb48f4448a590c7fae3a094, type: 3}
+    - {fileID: 2800000, guid: c905a81c0988ba34f91a4939ef696346, type: 3}
+    - {fileID: 2800000, guid: 84b7accd6cae59344bdb0401a9038f36, type: 3}
+    - {fileID: 2800000, guid: 84e6ccca23e110e44b2cc58d0d1f7c74, type: 3}
+    - {fileID: 2800000, guid: 2cc03d19b638e0c44ac7d4fcc91e69b4, type: 3}
+    - {fileID: 2800000, guid: bd1a7546e181e3f4aa4dedea30674db5, type: 3}
+    - {fileID: 2800000, guid: bc765b0259c0bdf4aae273c5f67b982a, type: 3}
+    - {fileID: 2800000, guid: 663bc24b9264f714db7f873b5cb1f6f1, type: 3}
+    - {fileID: 2800000, guid: 4011e38540ad66346a5ce97d3256025c, type: 3}
+    - {fileID: 2800000, guid: 2f72c2bc945c98844a962857ab52b8dc, type: 3}
+    - {fileID: 2800000, guid: cf3d39a7c98a1164cbd487b6e3ae0114, type: 3}
+    - {fileID: 2800000, guid: ce92f10340f13e145b558a06c439ac9a, type: 3}
+    - {fileID: 2800000, guid: 51f9d1d36284518439ed90cdd76f04bb, type: 3}
+    - {fileID: 2800000, guid: 0330c02a9015bdb43b1343219413224c, type: 3}
+    - {fileID: 2800000, guid: 3c56ad7d67d8496428afae0ffa8daf3f, type: 3}
+    - {fileID: 2800000, guid: 0a74a32997df8434386aad038046bd3b, type: 3}
+    - {fileID: 2800000, guid: 62903e4a17aff524d9b93724e8b9ec80, type: 3}
+    - {fileID: 2800000, guid: be9df36bee0639d4aa8e86b087a4d003, type: 3}
+    - {fileID: 2800000, guid: 484af28d05b572f41aaf8c6c8b47b7c1, type: 3}
+    - {fileID: 2800000, guid: a8a0baf5686750c4d8b7fd74fb3922df, type: 3}
+    - {fileID: 2800000, guid: 837590cb205a7a246b5e0736fd718d91, type: 3}
+    - {fileID: 2800000, guid: 8a7064410ccffe04c94421d2b62cc8fc, type: 3}
+    - {fileID: 2800000, guid: 7bc903303a9138c42b92062e57d90784, type: 3}
+    - {fileID: 2800000, guid: 82fe503bb2a32a74abbf25994c6044b2, type: 3}
+    - {fileID: 2800000, guid: dcd43d759f94ea549ac5492519457a79, type: 3}
+    - {fileID: 2800000, guid: 84b943df61e27b44aa1e4346fda0672e, type: 3}
+    - {fileID: 2800000, guid: 6becb0ddafc015244b60a5d3210737b1, type: 3}
+    - {fileID: 2800000, guid: 46f70abf25080404688a207399d5d4a3, type: 3}
+    - {fileID: 2800000, guid: 1160a4dd75e32a1468fa2adb40161c50, type: 3}
+    - {fileID: 2800000, guid: e5108f5a2432a2e4e93f92873a6f8296, type: 3}
+  - popupType: 1
+    classificationType: 2
+    textContent: sample image 2
+    imageContent: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+    videoContent: []
 --- !u!1 &1468274096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,17 +1410,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018869631}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2038830351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7346806653902628382, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
-  m_PrefabInstance: {fileID: 4419728050496057416}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d291ea5265e3b5f4bacc4de53a8932aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2042905666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1664,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2042905667}
     m_Modifications:
+    - target: {fileID: 248447662400767758, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5229240480210888633, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
       propertyPath: m_Name
       value: Computer
