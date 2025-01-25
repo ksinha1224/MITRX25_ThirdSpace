@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState { get; private set; }
     public Action<GameState> OnGameStateChange;
 
+    [SerializeField] private GameObject editorSim;
     [SerializeField] private Computer computer;
     [field: SerializeField] public List<Popup> ActivePopups { get; private set; }
 
@@ -17,6 +18,11 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
+#if UNITY_EDITOR
+        editorSim.SetActive(true); //if this is active in build a fatal error crashes the game immediately???
+#else
+        editorSim.SetActive(false);
+#endif
         OnGameStateChange += UpdateGameState;
     }
 

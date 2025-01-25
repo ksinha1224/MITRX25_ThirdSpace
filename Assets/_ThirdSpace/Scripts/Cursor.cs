@@ -50,6 +50,7 @@ public class Cursor : MonoBehaviour
         lastLocalPos = thisRect.localPosition;
     }
 
+    #region xr interaction events
     public void INTERACT_OnHover()
     {
         if(!isMoving)
@@ -78,33 +79,30 @@ public class Cursor : MonoBehaviour
 
     public void INTERACT_OnActivate()
     {
-        //simulate mouse click
-        //check for any overlapping popup rects
-        //only pass on effects to the "topmost" one in depth order (highest on top- instantiation order)
-
         List<Popup> intersectedPopups = new List<Popup>();
         foreach(Popup popup in GameManager.Instance.ActivePopups)
         {
             bool intersects = RectsIntersect(thisRect, popup.rectTransform);
-            Debug.Log($"popup {popup.gameObject.name} intersects? {intersects}");
-
             if(intersects)
             {
                 intersectedPopups.Add(popup);
             }
         }
 
-        intersectedPopups = intersectedPopups.OrderByDescending(popup => popup.DepthLayer).ToList();
-        //intersectedPopups[0].StartMoving(thisRect);
+        if (intersectedPopups.Count == 0) return;
 
-        toMove = intersectedPopups[0];
+        toMove = intersectedPopups.OrderByDescending(popup => popup.transform.GetSiblingIndex()).ToList()[0];
         lastLocalPos = thisRect.localPosition;
+
+        toMove.transform.SetAsLastSibling(); //brings to front of render order, simulating "focusing" the popup
     }
 
     public void INTERACT_OnDeactivate()
     {
         toMove = null;
     }
+
+    #endregion
 
     private void ClampToScreen()
     {
@@ -126,7 +124,7 @@ public class Cursor : MonoBehaviour
     }
 
     //ref: https://stackoverflow.com/questions/42043017/check-if-ui-elements-recttransform-are-overlapping
-    public Rect WorldRect(RectTransform rectTransform)
+    private Rect WorldRect(RectTransform rectTransform)
     {
         Vector2 sizeDelta = rectTransform.sizeDelta;
         float rectTransformWidth = sizeDelta.x * rectTransform.lossyScale.x;
