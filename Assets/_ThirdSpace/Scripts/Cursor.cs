@@ -144,9 +144,13 @@ public class Cursor : MonoBehaviour
     public void INTERACT_OnDeactivate()
     {
         icon.texture = cursorOpen;
-        toMove = null;
 
-        //toMove.IdentifyCheck();
+        if (toMove.gameObject.TryGetComponent(out Popup popup)) //this is gross sorry
+        {
+            popup.IdentifyCheck();
+        }
+
+        toMove = null;
     }
 
     #endregion

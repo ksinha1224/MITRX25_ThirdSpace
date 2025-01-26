@@ -22,15 +22,6 @@ public class GameManager : MonoBehaviour
 
     [field: SerializeField] public List<PopupData> testContent { get; private set; }
 
-    [SerializeField] private CanvasGroup warningGroup;
-    [SerializeField] private CanvasGroup tutorialGroup;
-    [SerializeField] private CanvasGroup startGroup;
-
-    [SerializeField] private TMP_Text tutorialText;
-    [SerializeField] private RawImage tutorialImg;
-    [SerializeField] private Texture tutorialStep1;
-    [SerializeField] private Texture tutorialStep2;
-
     private void Awake()
     {
         if (Instance == null)
@@ -46,9 +37,10 @@ public class GameManager : MonoBehaviour
         ActivePopups = new List<Popup>();
         Grabbables = new List<ScreenGrabbable>();
 
-        foreach(Folder folder in folders)
+        for(int i = 0; i < folders.Count; i++)
         {
-            Grabbables.Add(folder.grabbable);
+            folders[i].Init((MediaClassification)i);
+            Grabbables.Add(folders[i].grabbable);
         }
     }
 
@@ -117,7 +109,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        StartCoroutine(ChangeText(newText));
+        StartCoroutine(computer.ChangeText(newText));
     }
 
     public void AddPopup(Popup toAdd)
@@ -135,35 +127,6 @@ public class GameManager : MonoBehaviour
     public Folder GetFolder(MediaClassification toGrab)
     {
         return folders.Where(folder => folder.classification == toGrab).First();
-    }
-
-    private IEnumerator ChangeText(string changeTo)
-    {
-        yield return FadeGraphic(tutorialText, false);
-        tutorialText.text = changeTo;
-        yield return FadeGraphic(tutorialText, true);
-    }
-
-    private IEnumerator FadeGraphic(Graphic graphic, bool on)
-    {
-        if (on)
-        {
-            while (graphic.color.a < 1)
-            {
-                Color newColor = graphic.color;
-                newColor.a += 0.1f;
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
-        else
-        {
-            while (graphic.color.a > 0)
-            {
-                Color newColor = graphic.color;
-                newColor.a -= 0.1f;
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
     }
 
     private void UpdateGameState(GameState newState)
