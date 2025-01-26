@@ -794,11 +794,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.8
+      value: -0.95
       objectReference: {fileID: 0}
     - target: {fileID: 4134505312059479865, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3904,6 +3904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1411336846}
+  - component: {fileID: 1411336847}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3926,6 +3927,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 108709952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1411336847
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411336845}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4057063e77c379a4cafe2f71e25c7fba, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1448484100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4216,69 +4313,119 @@ MonoBehaviour:
   - {fileID: 4419728050496057421}
   - {fileID: 4419728050496057420}
   - {fileID: 4419728050496057419}
-  <testContent>k__BackingField:
+  <popupContent>k__BackingField:
   - popupType: 0
     classificationType: 0
     profileTexture: {fileID: 0}
-    textContent: sample tweet 1
+    textContent: Philosophy Club is doing a Society of the Spectacle reading group,
+      meet you there?
     imageContent: {fileID: 0}
-    videoContent: []
+  - popupType: 0
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: "YO, let\u2019s go to a hardcore show tonight!"
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: "The Lumberton Lumberyard workers are striking, let\u2019s get them
+      some coffees for the cold!"
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: Hosting our public library on a peer-to-peer network, wanna help?
+    imageContent: {fileID: 0}
   - popupType: 1
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: "Got rejected again, told my co-worker Rosa and dinner is on her.
+      We\u2019re so back, come with."
+    imageContent: {fileID: 0}
+  - popupType: 1
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: 'Mew_God: Negative Canthal Tilt Detected; Opinion Rejected'
+    imageContent: {fileID: 2800000, guid: c4476f68287cb834e9cbb3500276bb0b, type: 3}
+  - popupType: 0
+    classificationType: 0
+    profileTexture: {fileID: 2800000, guid: 3a6cc854109da8648b58d54c3ae0f479, type: 3}
+    textContent: "@cunnyslayer: Loli is justice, they\u2019re not kids they\u2019re
+      drawings."
+    imageContent: {fileID: 0}
+  - popupType: 2
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: 'Travis Bateboy Kills Homeless Man: Small Dim Age Edit'
+    imageContent: {fileID: 2800000, guid: baa08dc994d892c42abe5abd39474eb8, type: 3}
+  - popupType: 1
+    classificationType: 0
+    profileTexture: {fileID: 0}
+    textContent: Why is this dishwasher acting up, get back to the kitchen
+    imageContent: {fileID: 2800000, guid: e7f037fdc0d44a14b9f95873f0042476, type: 3}
+  - popupType: 0
+    classificationType: 1
+    profileTexture: {fileID: 2800000, guid: eaccd61518b175a4c80f5b465a2a9c39, type: 3}
+    textContent: '@TroonsGetRoped: Seethe, YWNBAW (You Will Never Be a Woman)'
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 1
+    profileTexture: {fileID: 2800000, guid: c47b20cfc09d61b4f846db399351c5c5, type: 3}
+    textContent: '@madamNFT_ACC: $GeorgeFloyd Coin dropping NOW autists.'
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 1
+    profileTexture: {fileID: 2800000, guid: ea01d206f2abd594681985539e3bcb1f, type: 3}
+    textContent: "@OrthoFrog:\u201CYour Body My Choice Female\u201D"
+    imageContent: {fileID: 0}
+  - popupType: 2
     classificationType: 1
     profileTexture: {fileID: 0}
-    textContent: sample image 1
-    imageContent: {fileID: 28684132378477856, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    videoContent: []
-  - popupType: 2
-    classificationType: 3
-    profileTexture: {fileID: 0}
-    textContent: coffee???
+    textContent: Make Women Understand Their Place
+    imageContent: {fileID: 2800000, guid: a9adb95151d26e64899453a64f9d5785, type: 3}
+  - popupType: 0
+    classificationType: 2
+    profileTexture: {fileID: 2800000, guid: 872c06b65a0b31045a7ae52b0afae764, type: 3}
+    textContent: '@Based_Historian: Races differ in IQ, read the Bell Curve, preserve
+      your race.'
     imageContent: {fileID: 0}
-    videoContent:
-    - {fileID: 2800000, guid: 4bfc3c21b2caa3346b15524bc6e5b1cc, type: 3}
-    - {fileID: 2800000, guid: 7d67cc1af089eb344adf838d38d5ce4f, type: 3}
-    - {fileID: 2800000, guid: 59316173b9c230b4188b26a96344cec3, type: 3}
-    - {fileID: 2800000, guid: d723f9b49f47e0743bb19743b1f1598e, type: 3}
-    - {fileID: 2800000, guid: d282554b7e1b84f48a902f32f35d6f72, type: 3}
-    - {fileID: 2800000, guid: e740e8d0e59acd94192481af37f188fc, type: 3}
-    - {fileID: 2800000, guid: 4d10496bde17d204aa04bc9f48f1f5ca, type: 3}
-    - {fileID: 2800000, guid: 84399a2d5bb48f4448a590c7fae3a094, type: 3}
-    - {fileID: 2800000, guid: c905a81c0988ba34f91a4939ef696346, type: 3}
-    - {fileID: 2800000, guid: 84b7accd6cae59344bdb0401a9038f36, type: 3}
-    - {fileID: 2800000, guid: 84e6ccca23e110e44b2cc58d0d1f7c74, type: 3}
-    - {fileID: 2800000, guid: 2cc03d19b638e0c44ac7d4fcc91e69b4, type: 3}
-    - {fileID: 2800000, guid: bd1a7546e181e3f4aa4dedea30674db5, type: 3}
-    - {fileID: 2800000, guid: bc765b0259c0bdf4aae273c5f67b982a, type: 3}
-    - {fileID: 2800000, guid: 663bc24b9264f714db7f873b5cb1f6f1, type: 3}
-    - {fileID: 2800000, guid: 4011e38540ad66346a5ce97d3256025c, type: 3}
-    - {fileID: 2800000, guid: 2f72c2bc945c98844a962857ab52b8dc, type: 3}
-    - {fileID: 2800000, guid: cf3d39a7c98a1164cbd487b6e3ae0114, type: 3}
-    - {fileID: 2800000, guid: ce92f10340f13e145b558a06c439ac9a, type: 3}
-    - {fileID: 2800000, guid: 51f9d1d36284518439ed90cdd76f04bb, type: 3}
-    - {fileID: 2800000, guid: 0330c02a9015bdb43b1343219413224c, type: 3}
-    - {fileID: 2800000, guid: 3c56ad7d67d8496428afae0ffa8daf3f, type: 3}
-    - {fileID: 2800000, guid: 0a74a32997df8434386aad038046bd3b, type: 3}
-    - {fileID: 2800000, guid: 62903e4a17aff524d9b93724e8b9ec80, type: 3}
-    - {fileID: 2800000, guid: be9df36bee0639d4aa8e86b087a4d003, type: 3}
-    - {fileID: 2800000, guid: 484af28d05b572f41aaf8c6c8b47b7c1, type: 3}
-    - {fileID: 2800000, guid: a8a0baf5686750c4d8b7fd74fb3922df, type: 3}
-    - {fileID: 2800000, guid: 837590cb205a7a246b5e0736fd718d91, type: 3}
-    - {fileID: 2800000, guid: 8a7064410ccffe04c94421d2b62cc8fc, type: 3}
-    - {fileID: 2800000, guid: 7bc903303a9138c42b92062e57d90784, type: 3}
-    - {fileID: 2800000, guid: 82fe503bb2a32a74abbf25994c6044b2, type: 3}
-    - {fileID: 2800000, guid: dcd43d759f94ea549ac5492519457a79, type: 3}
-    - {fileID: 2800000, guid: 84b943df61e27b44aa1e4346fda0672e, type: 3}
-    - {fileID: 2800000, guid: 6becb0ddafc015244b60a5d3210737b1, type: 3}
-    - {fileID: 2800000, guid: 46f70abf25080404688a207399d5d4a3, type: 3}
-    - {fileID: 2800000, guid: 1160a4dd75e32a1468fa2adb40161c50, type: 3}
-    - {fileID: 2800000, guid: e5108f5a2432a2e4e93f92873a6f8296, type: 3}
+  - popupType: 0
+    classificationType: 2
+    profileTexture: {fileID: 2800000, guid: c40b6ad5e84713b45affdcb60c11408d, type: 3}
+    textContent: 'SrgntJohnsonUSMC1956: The elites are teaching radical socialism
+      in 3rd grade. '
+    imageContent: {fileID: 0}
   - popupType: 1
     classificationType: 2
     profileTexture: {fileID: 0}
-    textContent: sample image 2
-    imageContent: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
-    videoContent: []
-  <popupContent>k__BackingField: []
+    textContent: "@TradLyfe: Browns are replacing us; it\u2019s a white genocide."
+    imageContent: {fileID: 2800000, guid: 18ec986d2e7b34840910942f1d3f6c37, type: 3}
+  - popupType: 0
+    classificationType: 2
+    profileTexture: {fileID: 0}
+    textContent: "@Noticer: \u201CBlack culture, 50% of crime by 13% of the population\u201D"
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 3
+    profileTexture: {fileID: 2800000, guid: f29be5274e3d6a74f9b1684bdc169e21, type: 3}
+    textContent: '@WhiteLiberty: Helicopter executions for the Jewish communist threat.'
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 3
+    profileTexture: {fileID: 2800000, guid: e4eda37c7295fae4383661b2266beb46, type: 3}
+    textContent: '@LugubriousSneed1488: Western civilization has fallen; enough n*****s,
+      k**es, and browns.'
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 3
+    profileTexture: {fileID: 2800000, guid: d942f151b3753224c99b94e4c89c4f04, type: 3}
+    textContent: "@BronzeAgeNow: We\u2019re at war, REVOLT. Cleanse degeneracy."
+    imageContent: {fileID: 0}
+  - popupType: 0
+    classificationType: 3
+    profileTexture: {fileID: 2800000, guid: a89b3f28e6305af4ba82793dfeced022, type: 3}
+    textContent: '@NordicCrvsader: Moustache Man was right, Nazis did nothing wrong.'
+    imageContent: {fileID: 0}
   StartButton: {fileID: 1522240227}
   tutorialPopup: {fileID: 162800918}
   tutorialText: {fileID: 1532373658}
@@ -6826,7 +6973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6518228219726339957, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.026
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 6518228219726339957, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
       propertyPath: m_LocalRotation.w

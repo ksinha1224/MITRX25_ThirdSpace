@@ -46,11 +46,12 @@ public class Popup : MonoBehaviour
             case PopupType.Tweet:
                 break;
             case PopupType.Image:
-                contentImg.texture = data.imageContent;
-                break;
+                //contentImg.texture = data.imageContent;
+                //break;
             case PopupType.Video:
-                contentImg.texture = data.videoContent[0];
-                videoPlaybackRoutine = StartCoroutine(Playback());
+                //contentImg.texture = data.videoContent[0];
+                //videoPlaybackRoutine = StartCoroutine(Playback());
+                contentImg.texture = data.imageContent;
                 break;
         }
 
@@ -68,17 +69,17 @@ public class Popup : MonoBehaviour
         }
     }
 
-    IEnumerator Playback()
-    {
-        for(int i = 0; i < data.videoContent.Length; i++)
-        {
-            contentImg.texture = data.videoContent[i];
-            yield return new WaitForSeconds(0.1f);
+    //IEnumerator Playback()
+    //{
+    //    for(int i = 0; i < data.videoContent.Length; i++)
+    //    {
+    //        contentImg.texture = data.videoContent[i];
+    //        yield return new WaitForSeconds(0.1f);
 
-            if (i == data.videoContent.Length - 1)
-                i = 0;
-        }
-    }
+    //        if (i == data.videoContent.Length - 1)
+    //            i = 0;
+    //    }
+    //}
 
     IEnumerator Minimize()
     {
@@ -109,7 +110,7 @@ public class PopupData
     public Texture profileTexture;
     public string textContent;
     public Texture imageContent;
-    public Texture[] videoContent;
+    //public Texture[] videoContent;
 }
 
 public enum PopupType { Tweet, Image, Video }

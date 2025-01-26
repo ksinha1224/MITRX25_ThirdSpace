@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Computer computer;
     [SerializeField] private List<Folder> folders;
 
-    [field: SerializeField] public List<PopupData> testContent { get; private set; }
+    //[field: SerializeField] public List<PopupData> testContent { get; private set; }
     [field: SerializeField] public List<PopupData> popupContent { get; private set; }
 
     public RectTransform StartButton;
@@ -54,11 +54,26 @@ public class GameManager : MonoBehaviour
             folders[i].Init((MediaClassification)i);
             Grabbables.Add(folders[i].grabbable);
         }
+
+        var count = popupContent.Count;
+        var last = count - 1;
+        for (var i = 0; i < last; ++i)
+        {
+            var r = UnityEngine.Random.Range(i, count);
+            var tmp = popupContent[i];
+            popupContent[i] = popupContent[r];
+            popupContent[r] = tmp;
+        }
     }
 
     private void Start()
     {
         StartCoroutine(computer.FadeScreenOn());
+    }
+
+    public void PlayClick()
+    {
+        computer.PlayClick();
     }
 
     public void StartGame()
@@ -131,6 +146,13 @@ public class GameManager : MonoBehaviour
     {
         ActivePopups.Remove(toRemove);
         Grabbables.Remove(toRemove.grabbable);
+        
+
+        if(ActivePopups.Count == 0)
+        {
+            OnGameStateChange?.Invoke(GameState.NotPlaying);
+            computer.EndGame();
+        }
     }
 
     public Folder GetFolder(MediaClassification toGrab)

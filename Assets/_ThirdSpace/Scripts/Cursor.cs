@@ -26,6 +26,8 @@ public class Cursor : MonoBehaviour
     private Vector3 lastLocalPos;
     private ScreenGrabbable toMove;
 
+    private float clampZ;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class Cursor : MonoBehaviour
         icon.color = defaultColor;
 
         outline.enabled = false;
+        clampZ = cursorParentRect.transform.position.z;
     }
 
     private void Update()
@@ -49,7 +52,7 @@ public class Cursor : MonoBehaviour
             return;
 
         Vector3 newPos = followPoint.position;
-        newPos.z = transform.position.z;
+        newPos.z = clampZ;
 
         transform.position = newPos;
         ClampToScreen();
@@ -139,6 +142,7 @@ public class Cursor : MonoBehaviour
             return;
         }
 
+        GameManager.Instance.PlayClick();
         toMove = intersectedGrabbables.OrderByDescending(popup => popup.transform.GetSiblingIndex()).ToList()[0];
         lastLocalPos = cursorParentRect.localPosition;
 

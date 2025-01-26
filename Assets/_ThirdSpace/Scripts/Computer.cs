@@ -19,25 +19,16 @@ public class Computer : MonoBehaviour
     [SerializeField] private CanvasGroup warningGroup;
     [SerializeField] private CanvasGroup tutorialGroup;
     [SerializeField] private CanvasGroup startGroup;
+    [SerializeField] private GameObject endText;
 
     [SerializeField] private Popup[] popupPrefabs; //0 = tweet template, 1 = picture template, 2 = video template
 
-    public void Init()
+    float timer;
+    int popupIndex = 0;
+
+    public void PlayClick()
     {
-        //load blank bg screen
-        //load start button / initial popup
-
-        //slow alpha fade on
-
-        foreach(PopupData data in GameManager.Instance.testContent)
-        {
-            Vector2 randomPos = new Vector2(Random.Range(-550, 550), Random.Range(-210, 210));
-            Popup toSpawn = Instantiate(popupPrefabs[(int)data.popupType], popupParent);
-
-            toSpawn.Init(data, randomPos);
-
-            GameManager.Instance.AddPopup(toSpawn);
-        }
+        sfx.PlayOneShot(click);
     }
 
     public IEnumerator FadeScreenOn()
@@ -84,24 +75,56 @@ public class Computer : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        sfx.PlayOneShot(click);
+        PlayClick();
 
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 5; i++)
         {
-            PopupData data = GameManager.Instance.testContent[i];
-
-            Vector2 randomPos = new Vector2(Random.Range(-550, 550), Random.Range(-210, 210));
-            Popup toSpawn = Instantiate(popupPrefabs[(int)data.popupType], popupParent);
-
-            toSpawn.Init(data, randomPos);
-
-            GameManager.Instance.AddPopup(toSpawn);
-            sfx.Play();
+            SpawnPopup();
             yield return new WaitForSeconds(0.5f);
         }
 
         startPopup.SetActive(false);
         GameManager.OnGameStateChange?.Invoke(GameState.PlayerInteraction);
+    }
+
+    public void EndGame()
+    {
+        popupParent.gameObject.SetActive(false);
+        endText.SetActive(true);
+        StartCoroutine(FadeGroup(startGroup, true));
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.CurrentState == GameState.PlayerInteraction)
+        {
+            timer += Time.deltaTime;
+            if (timer > 5f)
+            {
+                timer = 0f;
+                SpawnPopup();
+            }
+        }
+    }
+
+    void SpawnPopup()
+    {
+        PopupData data = GameManager.Instance.popupContent[popupIndex];
+
+        Vector2 randomPos = new Vector2(Random.Range(-550, 550), Random.Range(-210, 210));
+        Popup toSpawn = Instantiate(popupPrefabs[(int)data.popupType], popupParent);
+
+        toSpawn.Init(data, randomPos);
+
+        GameManager.Instance.AddPopup(toSpawn);
+        sfx.Play();
+
+        popupIndex++;
+
+        if(popupIndex == GameManager.Instance.popupContent.Count - 1)
+        {
+            popupIndex = 0;
+        }
     }
 
     public IEnumerator ChangeText(TMP_Text text, string changeTo)
