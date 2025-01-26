@@ -12,9 +12,11 @@ public class GameManager : MonoBehaviour
     public GameState CurrentState { get; private set; }
     public static Action<GameState> OnGameStateChange;
 
-    [field: SerializeField] public List<Popup> ActivePopups { get; private set; }
+    public List<ScreenGrabbable> Grabbables { get; private set; }
+    public List<Popup> ActivePopups { get; private set; }
 
     [SerializeField] private GameObject editorSim;
+
     [SerializeField] private Computer computer;
     [SerializeField] private List<Folder> folders;
 
@@ -40,16 +42,24 @@ public class GameManager : MonoBehaviour
         editorSim.SetActive(false);
 #endif
         OnGameStateChange += UpdateGameState;
+
+        ActivePopups = new List<Popup>();
+        Grabbables = new List<ScreenGrabbable>();
+
+        foreach(Folder folder in folders)
+        {
+            Grabbables.Add(folder.grabbable);
+        }
     }
 
     private void Start()
     {
         //todo: intro and tutorial flow
 
-        //OnGameStateChange?.Invoke(GameState.PlayerInteraction);
-        //computer.Init();
+        OnGameStateChange?.Invoke(GameState.PlayerInteraction);
+        computer.Init();
 
-        StartCoroutine(IntroRoutine());
+        //StartCoroutine(IntroRoutine());
     }
 
     private IEnumerator IntroRoutine()
@@ -63,6 +73,8 @@ public class GameManager : MonoBehaviour
         //run thru tutorial
         //load start screen
         //wait for button click to trigger cutscene
+
+
     }
 
     public void TutorialUpdate(int opCode)
@@ -111,11 +123,13 @@ public class GameManager : MonoBehaviour
     public void AddPopup(Popup toAdd)
     {
         ActivePopups.Add(toAdd);
+        Grabbables.Add(toAdd.grabbable);
     }
 
     public void RemovePopup(Popup toRemove)
     {
         ActivePopups.Remove(toRemove);
+        Grabbables.Remove(toRemove.grabbable);
     }
 
     public Folder GetFolder(MediaClassification toGrab)

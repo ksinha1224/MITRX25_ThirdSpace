@@ -6,6 +6,7 @@ using TMPro;
 
 public class Popup : MonoBehaviour
 {
+    [field: SerializeField] public ScreenGrabbable grabbable { get; private set; }
     [field: SerializeField] public RectTransform rectTransform { get; private set; }
 
     [SerializeField] private RawImage profilePic;
@@ -54,11 +55,6 @@ public class Popup : MonoBehaviour
         }
 
         rectTransform.localPosition = screenPos;
-    }
-
-    public void UpdatePositionBy(Vector3 diff)
-    {
-        rectTransform.localPosition += diff;
     }
 
     public void IdentifyCheck()

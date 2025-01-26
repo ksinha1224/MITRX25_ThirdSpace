@@ -425,6 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 654188830493333885}
   - component: {fileID: 6100011723423012267}
+  - component: {fileID: 6676358167292613782}
   - component: {fileID: 69452511226417508}
   - component: {fileID: 8673320857354974326}
   m_Layer: 0
@@ -466,6 +467,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252957717414827114}
   m_CullTransparentMesh: 1
+--- !u!114 &6676358167292613782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7252957717414827114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1426fe468cf8ab4b85721ee902c1245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 654188830493333885}
 --- !u!114 &69452511226417508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d291ea5265e3b5f4bacc4de53a8932aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <grabbable>k__BackingField: {fileID: 6676358167292613782}
   <rectTransform>k__BackingField: {fileID: 654188830493333885}
   profilePic: {fileID: 3434487650391269063}
   contentImg: {fileID: 3068197679211572945}

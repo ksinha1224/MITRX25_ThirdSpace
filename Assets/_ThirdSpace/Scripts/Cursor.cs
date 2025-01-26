@@ -23,7 +23,7 @@ public class Cursor : MonoBehaviour
     private Transform followPoint;
 
     private Vector3 lastLocalPos;
-    private Popup toMove;
+    private ScreenGrabbable toMove;
 
     // Start is called before the first frame update
     void Start()
@@ -110,17 +110,17 @@ public class Cursor : MonoBehaviour
     {
         icon.texture = cursorClosed;
 
-        List<Popup> intersectedPopups = new List<Popup>();
-        foreach(Popup popup in GameManager.Instance.ActivePopups)
+        List<ScreenGrabbable> intersectedGrabbables = new List<ScreenGrabbable>();
+        foreach(ScreenGrabbable grabbable in GameManager.Instance.Grabbables)
         {
-            bool intersects = cursorParentRect.WorldIntersects(popup.rectTransform);
+            bool intersects = cursorParentRect.WorldIntersects(grabbable.rectTransform);
             if(intersects)
             {
-                intersectedPopups.Add(popup);
+                intersectedGrabbables.Add(grabbable);
             }
         }
 
-        if (intersectedPopups.Count == 0)
+        if (intersectedGrabbables.Count == 0)
         {
             if (GameManager.Instance.CurrentState == GameState.Tutorial)
             {
@@ -130,7 +130,7 @@ public class Cursor : MonoBehaviour
             return;
         }
 
-        toMove = intersectedPopups.OrderByDescending(popup => popup.transform.GetSiblingIndex()).ToList()[0];
+        toMove = intersectedGrabbables.OrderByDescending(popup => popup.transform.GetSiblingIndex()).ToList()[0];
         lastLocalPos = cursorParentRect.localPosition;
 
         toMove.transform.SetAsLastSibling(); //brings to front of render order, simulating "focusing" the popup
