@@ -49,7 +49,7 @@ public class Cursor : MonoBehaviour
         newPos.z = transform.position.z;
 
         transform.position = newPos;
-        //ClampToScreen();
+        ClampToScreen();
 
         if (toMove == null)
             return;
