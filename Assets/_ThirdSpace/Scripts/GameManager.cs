@@ -46,10 +46,23 @@ public class GameManager : MonoBehaviour
 #endif
         OnGameStateChange += UpdateGameState;
 
+        ResetContent();
+    }
+
+    private void ResetContent()
+    {
+        if(ActivePopups != null)
+        {
+            foreach(Popup popup in ActivePopups)
+            {
+                Destroy(popup.gameObject);
+            }
+        }
+
         ActivePopups = new List<Popup>();
         Grabbables = new List<ScreenGrabbable>();
 
-        for(int i = 0; i < folders.Count; i++)
+        for (int i = 0; i < folders.Count; i++)
         {
             folders[i].Init((MediaClassification)i);
             Grabbables.Add(folders[i].grabbable);
@@ -78,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        ResetContent();
         StartCoroutine(computer.StartGame());
     }
 
