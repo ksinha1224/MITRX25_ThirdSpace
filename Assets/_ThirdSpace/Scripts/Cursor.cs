@@ -8,6 +8,7 @@ using System.Linq;
 
 public class Cursor : MonoBehaviour
 {
+    public RectTransform rectTransform { get { return cursorParentRect; } private set { } }
     [SerializeField] private RectTransform screenRect;
     [SerializeField] private RectTransform cursorParentRect;
     [SerializeField] private RawImage outline;
@@ -36,7 +37,7 @@ public class Cursor : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.CurrentState == GameState.PlayerInteraction || GameManager.Instance.CurrentState == GameState.Tutorial)
+        if(GameManager.Instance.CurrentState != GameState.Cutscene)
         {
             MovementUpdate();
         }
@@ -108,6 +109,14 @@ public class Cursor : MonoBehaviour
 
     public void INTERACT_OnActivate()
     {
+        if(GameManager.Instance.CurrentState == GameState.NotPlaying)
+        {
+            if (cursorParentRect.WorldIntersects(GameManager.Instance.StartButton))
+            {
+                GameManager.Instance.StartGame();
+            }
+            return;
+        }
         icon.texture = cursorClosed;
 
         List<ScreenGrabbable> intersectedGrabbables = new List<ScreenGrabbable>();
@@ -145,7 +154,7 @@ public class Cursor : MonoBehaviour
     {
         icon.texture = cursorOpen;
 
-        if (toMove.gameObject.TryGetComponent(out Popup popup)) //this is gross sorry
+        if (toMove != null && toMove.gameObject.TryGetComponent(out Popup popup)) //this is gross sorry
         {
             popup.IdentifyCheck();
         }

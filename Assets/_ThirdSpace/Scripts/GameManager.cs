@@ -21,6 +21,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Folder> folders;
 
     [field: SerializeField] public List<PopupData> testContent { get; private set; }
+    [field: SerializeField] public List<PopupData> popupContent { get; private set; }
+
+    public RectTransform StartButton;
+
+    [SerializeField] private GameObject tutorialPopup;
+    [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private RawImage tutorialImg;
+    [SerializeField] private Texture tutorialStep0;
+    [SerializeField] private Texture tutorialStep1;
+    [SerializeField] private Texture tutorialStep2;
+
+    private int lastOpCode = -1;
 
     private void Awake()
     {
@@ -46,27 +58,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //todo: intro and tutorial flow
-
-        OnGameStateChange?.Invoke(GameState.PlayerInteraction);
-        computer.Init();
-
-        //StartCoroutine(IntroRoutine());
+        StartCoroutine(computer.FadeScreenOn());
     }
 
-    private IEnumerator IntroRoutine()
+    public void StartGame()
     {
-        yield return null;
-
-        //computer screen fades on
-        //warning fades on
-        //wait a bit
-        //tutorial fades on
-        //run thru tutorial
-        //load start screen
-        //wait for button click to trigger cutscene
-
-
+        StartCoroutine(computer.StartGame());
     }
 
     public void TutorialUpdate(int opCode)
@@ -78,6 +75,10 @@ public class GameManager : MonoBehaviour
         //4 = activated WITH POPUP
         //5 = moved into folder (complete)
 
+        if (opCode <= lastOpCode) return;
+
+        lastOpCode = opCode;
+
         if (opCode < 0 || opCode > 5)
         {
             Debug.LogError($"unknown tutorial opcode {opCode}");
@@ -87,16 +88,21 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
 
         string newText = string.Empty;
+        Texture toChange = null;
         switch(opCode)
         {
             case 0:
                 newText = "Point to the <b>cursor</b> with your controller.";
+                toChange = tutorialStep0;
                 break;
             case 1:
                 newText = "Use the hand grips to move the <b>cursor</b> around the <b>screen</b>.";
+                toChange = tutorialStep1;
                 break;
             case 2:
                 newText = "While holding the grip, use the index trigger to select <b>popups</b> on the screen.";
+                tutorialPopup.gameObject.SetActive(true);
+                toChange = tutorialStep2;
                 break;
             case 3:
                 newText = "Try selecting the <b>popup</b>.";
@@ -106,10 +112,13 @@ public class GameManager : MonoBehaviour
                 break;
             case 5:
                 newText = "That's the flow. Good work.";
+                OnGameStateChange?.Invoke(GameState.NotPlaying);
                 break;
         }
 
-        StartCoroutine(computer.ChangeText(newText));
+        StartCoroutine(computer.ChangeText(tutorialText, newText));
+        if (toChange != null) ;
+            StartCoroutine(computer.ChangeImage(tutorialImg, toChange));
     }
 
     public void AddPopup(Popup toAdd)

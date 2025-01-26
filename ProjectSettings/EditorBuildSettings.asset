@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_ThirdSpace/Scenes/Main.unity
     guid: 5a2a7bbbe35d0e64a9c82e53eed1beb6
-  - enabled: 0
+  - enabled: 1
     path: Assets/Lighting - Ruby.unity
     guid: 8b1310bdc74594d948e27a26decddf98
   m_configObjects:
