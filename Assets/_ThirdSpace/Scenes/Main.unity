@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!225 &15628989 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4535505396758887687, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
+  m_PrefabInstance: {fileID: 4419728050496057416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &108709951
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +229,22 @@ PrefabInstance:
       addedObject: {fileID: 1397338109}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+--- !u!114 &550960373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 441417243018373575, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
+  m_PrefabInstance: {fileID: 4419728050496057416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!225 &591964167 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5463544577838575020, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
+  m_PrefabInstance: {fileID: 4419728050496057416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &745958046
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +655,17 @@ Transform:
   - {fileID: 2018869632}
   m_Father: {fileID: 2042905667}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1159073312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 993147660630840217, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
+  m_PrefabInstance: {fileID: 4419728050496057416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1232001911 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
@@ -643,6 +675,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
   m_PrefabInstance: {fileID: 906119510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1363847779 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5234557836756012451, guid: 303d2a65cff203140b8db5ae651aba22, type: 3}
+  m_PrefabInstance: {fileID: 4419728050496057416}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1397338108
 GameObject:
@@ -888,6 +925,13 @@ MonoBehaviour:
     textContent: sample image 2
     imageContent: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
     videoContent: []
+  warningGroup: {fileID: 591964167}
+  tutorialGroup: {fileID: 1363847779}
+  startGroup: {fileID: 15628989}
+  tutorialText: {fileID: 1159073312}
+  tutorialImg: {fileID: 550960373}
+  tutorialStep1: {fileID: 2800000, guid: 62c7592263af4a543b258b65cd06d1a7, type: 3}
+  tutorialStep2: {fileID: 2800000, guid: 2ec7cd5ab3fe6eb4fb491fcd4fa95825, type: 3}
 --- !u!1 &1468274096
 GameObject:
   m_ObjectHideFlags: 0

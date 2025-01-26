@@ -2,12 +2,15 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameState CurrentState { get; private set; }
-    public Action<GameState> OnGameStateChange;
+    public static Action<GameState> OnGameStateChange;
 
     [field: SerializeField] public List<Popup> ActivePopups { get; private set; }
 
@@ -16,6 +19,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Folder> folders;
 
     [field: SerializeField] public List<PopupData> testContent { get; private set; }
+
+    [SerializeField] private CanvasGroup warningGroup;
+    [SerializeField] private CanvasGroup tutorialGroup;
+    [SerializeField] private CanvasGroup startGroup;
+
+    [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private RawImage tutorialImg;
+    [SerializeField] private Texture tutorialStep1;
+    [SerializeField] private Texture tutorialStep2;
 
     private void Awake()
     {
@@ -32,12 +44,58 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //todo: intro and tutorial flow
+
+        OnGameStateChange?.Invoke(GameState.PlayerInteraction);
         computer.Init();
     }
 
     private void UpdateGameState(GameState newState)
     {
         CurrentState = newState;
+    }
+
+    public void TutorialUpdate(int opCode)
+    {
+        //0 = unhovered
+        //1 = hovered / unselected
+        //2 = selected / deactivated
+        //3 = activated NO POPUP
+        //4 = activated WITH POPUP
+        //5 = moved into folder (complete)
+
+        if (opCode < 0 || opCode > 5)
+        {
+            Debug.LogError($"unknown tutorial opcode {opCode}");
+            return;
+        }
+
+        StopAllCoroutines();
+
+        string newText = string.Empty;
+        switch(opCode)
+        {
+            case 0:
+                newText = "Point to the <b>cursor</b> with your controller.";
+                break;
+            case 1:
+                newText = "Use the hand grips to move the <b>cursor</b> around the <b>screen</b>.";
+                break;
+            case 2:
+                newText = "While holding the grip, use the index trigger to select <b>popups</b> on the screen.";
+                break;
+            case 3:
+                newText = "Try selecting the <b>popup</b>.";
+                break;
+            case 4:
+                newText = "Drag the <b>popup</b> to its folder to <b>identify</b> it.";
+                break;
+            case 5:
+                newText = "That's the flow. Good work.";
+                break;
+        }
+
+        StartCoroutine(ChangeText(newText));
     }
 
     public void AddPopup(Popup toAdd)
@@ -54,6 +112,35 @@ public class GameManager : MonoBehaviour
     {
         return folders.Where(folder => folder.classification == toGrab).First();
     }
+
+    private IEnumerator ChangeText(string changeTo)
+    {
+        yield return FadeGraphic(tutorialText, false);
+        tutorialText.text = changeTo;
+        yield return FadeGraphic(tutorialText, true);
+    }
+
+    private IEnumerator FadeGraphic(Graphic graphic, bool on)
+    {
+        if (on)
+        {
+            while (graphic.color.a < 1)
+            {
+                Color newColor = graphic.color;
+                newColor.a += 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else
+        {
+            while (graphic.color.a > 0)
+            {
+                Color newColor = graphic.color;
+                newColor.a -= 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+    }
 }
 
-public enum GameState { NotPlaying, Cutscene, PlayerInteraction }
+public enum GameState { NotPlaying, Tutorial, Cutscene, PlayerInteraction }

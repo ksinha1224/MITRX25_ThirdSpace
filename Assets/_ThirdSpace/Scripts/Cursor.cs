@@ -36,7 +36,10 @@ public class Cursor : MonoBehaviour
 
     private void Update()
     {
-        MovementUpdate();
+        if(GameManager.Instance.CurrentState == GameState.PlayerInteraction || GameManager.Instance.CurrentState == GameState.Tutorial)
+        {
+            MovementUpdate();
+        }
     }
 
     private void MovementUpdate()
@@ -45,7 +48,6 @@ public class Cursor : MonoBehaviour
             return;
 
         Vector3 newPos = followPoint.position;
-        Debug.Log(newPos);
         newPos.z = transform.position.z;
 
         transform.position = newPos;
@@ -65,12 +67,22 @@ public class Cursor : MonoBehaviour
     {
         if (!isMoving)
             outline.enabled = true;
+
+        if(GameManager.Instance.CurrentState == GameState.Tutorial)
+        {
+            GameManager.Instance.TutorialUpdate(1);
+        }
     }
 
     public void INTERACT_OnHoverExit()
     {
         if(!isMoving)
             outline.enabled = false;
+
+        if (GameManager.Instance.CurrentState == GameState.Tutorial)
+        {
+            GameManager.Instance.TutorialUpdate(0);
+        }
     }
 
     public void INTERACT_OnSelect(SelectEnterEventArgs args)
@@ -81,6 +93,11 @@ public class Cursor : MonoBehaviour
         isMoving = true;
 
         followPoint = args.interactorObject.GetAttachTransform(args.interactableObject);
+
+        if (GameManager.Instance.CurrentState == GameState.Tutorial)
+        {
+            GameManager.Instance.TutorialUpdate(2);
+        }
     }
 
     public void INTERACT_OnRelease()
@@ -103,12 +120,25 @@ public class Cursor : MonoBehaviour
             }
         }
 
-        if (intersectedPopups.Count == 0) return;
+        if (intersectedPopups.Count == 0)
+        {
+            if (GameManager.Instance.CurrentState == GameState.Tutorial)
+            {
+                GameManager.Instance.TutorialUpdate(3);
+            }
+
+            return;
+        }
 
         toMove = intersectedPopups.OrderByDescending(popup => popup.transform.GetSiblingIndex()).ToList()[0];
         lastLocalPos = cursorParentRect.localPosition;
 
         toMove.transform.SetAsLastSibling(); //brings to front of render order, simulating "focusing" the popup
+
+        if (GameManager.Instance.CurrentState == GameState.Tutorial)
+        {
+            GameManager.Instance.TutorialUpdate(4);
+        }
     }
 
     public void INTERACT_OnDeactivate()
