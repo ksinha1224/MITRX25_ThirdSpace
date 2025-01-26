@@ -55,6 +55,7 @@ MonoBehaviour:
   cursor: {fileID: 5506766120759640407}
   bg: {fileID: 2879943593977783198}
   warningGroup: {fileID: 5463544577838575020}
+  instructionsGroup: {fileID: 6162990677463508483}
   tutorialGroup: {fileID: 5234557836756012451}
   startGroup: {fileID: 4535505396758887687}
   endText: {fileID: 4459101772344187276}
@@ -334,6 +335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b6b176df101544580583091a95c303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &6162990677463508483 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 8440856627217360933, guid: bd00b4ff25b9cf646857dcd4f30bbc8f, type: 3}
+  m_PrefabInstance: {fileID: 2352186598701616678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6518228219726339957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8850069388661641555, guid: bd00b4ff25b9cf646857dcd4f30bbc8f, type: 3}

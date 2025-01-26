@@ -17,6 +17,7 @@ public class Computer : MonoBehaviour
 
     [SerializeField] private RawImage bg;
     [SerializeField] private CanvasGroup warningGroup;
+    [SerializeField] private CanvasGroup instructionsGroup;
     [SerializeField] private CanvasGroup tutorialGroup;
     [SerializeField] private CanvasGroup startGroup;
     [SerializeField] private GameObject endText;
@@ -42,6 +43,11 @@ public class Computer : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         yield return FadeGroup(warningGroup, false);
+        
+        StartCoroutine(FadeGroup(instructionsGroup, true));
+        yield return new WaitForSeconds(3f);
+
+        yield return FadeGroup(instructionsGroup, false);
 
         //nixing tutorial bc its not working idk
         //StartCoroutine(FadeGroup(tutorialGroup, true));

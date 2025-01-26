@@ -61,6 +61,7 @@ public class Cursor : MonoBehaviour
             return;
 
         Vector3 popupDiff = cursorParentRect.localPosition - lastLocalPos;
+        popupDiff.z = 0;
         toMove.UpdatePositionBy(popupDiff);
 
         lastLocalPos = cursorParentRect.localPosition;
