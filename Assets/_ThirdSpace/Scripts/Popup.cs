@@ -36,7 +36,7 @@ public class Popup : MonoBehaviour
     {
         data = toSet;
 
-        profilePic.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+        profilePic.texture = data.profileTexture;
         contentTxt.text = data.textContent;
 
         switch(data.popupType)
@@ -110,6 +110,7 @@ public class PopupData
     public PopupType popupType;
     public MediaClassification classificationType;
 
+    public Texture profileTexture;
     public string textContent;
     public Texture imageContent;
     public Texture[] videoContent;

@@ -46,13 +46,23 @@ public class GameManager : MonoBehaviour
     {
         //todo: intro and tutorial flow
 
-        OnGameStateChange?.Invoke(GameState.PlayerInteraction);
-        computer.Init();
+        //OnGameStateChange?.Invoke(GameState.PlayerInteraction);
+        //computer.Init();
+
+        StartCoroutine(IntroRoutine());
     }
 
-    private void UpdateGameState(GameState newState)
+    private IEnumerator IntroRoutine()
     {
-        CurrentState = newState;
+        yield return null;
+
+        //computer screen fades on
+        //warning fades on
+        //wait a bit
+        //tutorial fades on
+        //run thru tutorial
+        //load start screen
+        //wait for button click to trigger cutscene
     }
 
     public void TutorialUpdate(int opCode)
@@ -140,6 +150,11 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
+    }
+
+    private void UpdateGameState(GameState newState)
+    {
+        CurrentState = newState;
     }
 }
 
